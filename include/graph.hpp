@@ -1,17 +1,21 @@
+#include <iostream>
+#include <vector>
+#include <queue>
 
-
-
-
-class Graph{
+class Graph(){
     private:
-        
-        int** matrix = new int*;
-    public:
-        Graph();
-        ~Graph();
-        char getNode();
-        int getEdge();
-        void setNode();
-        void setEdge();
+        struct Edge(){
+            int weight;
+            int to;
+        };
+        int numberOfV;
+        std::vector<char> vertexNames[numberOfV];
+        std::vector<vector<Edge>> relations;
+    
+        void setName(int n);
+        void setNumberOfV(int n);
 
-};
+}
+
+
+
