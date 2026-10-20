@@ -1,21 +1,28 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <queue>
+#include <random>
 
-class Graph(){
-    private:
-        struct Edge(){
-            int weight;
-            int to;
-        };
-        int numberOfV;
-        std::vector<char> vertexNames[numberOfV];
-        std::vector<vector<Edge>> relations;
+struct Edge{
+        int weight;
+        int to;
+    };
+
+class Graph{
+private:
+    std::vector<std::string> vertexNames;
+    std::vector<std::vector<Edge>> relations;
     
-        void setName(int n);
-        void setNumberOfV(int n);
-
-}
+public:
+    int getVertexIndex(const std::string& name) const;
+    const std::vector<Edge>& getEdges(int index) const;
+    void setVertex(const std::string& name);
+    void displayGraph();
+    void setEdge(int distance,
+        const std::string& from, 
+        const std::string& to);
+};
 
 
 
