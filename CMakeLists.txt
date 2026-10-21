@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
-add_executable(main src/main.cpp src/graph.cpp src/bfs.cpp)
+add_executable(main src/main.cpp src/graph.cpp src/bfs.cpp
+    src/dfs.cpp)

@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 #include <random>
 
 struct Edge{
@@ -20,11 +19,11 @@ public:
     const int getSize()const;
     const std::vector<Edge>& getEdges(int index) const;
     void setVertex(const std::string& name);
-    void displayGraph();
     void setEdge(int distance,
         const std::string& from, 
         const std::string& to);
     void initGraph();
+    void displayGraph();
 };
 
 

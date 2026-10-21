@@ -13,7 +13,17 @@ const int Graph::getSize()const {
     return this->vertexNames.size();
 }
 
+const std::vector<Edge>& Graph::getEdges(int index) const{
+    return relations.at(index);
+}
 
+
+void Graph::setVertex(const std::string& name){
+    int indexName = getVertexIndex(name);
+    if(indexName != -1) return;
+    vertexNames.push_back(name);
+    relations.push_back(std::vector<Edge>());
+}
 
 void Graph::setEdge(int distance,
     const std::string& from, 
@@ -30,10 +40,6 @@ void Graph::setEdge(int distance,
         }
 }
 
-const std::vector<Edge>& Graph::getEdges(int index) const{
-    return relations.at(index);
-}
-
 void Graph::displayGraph(){
     std::cout<<"Graph = ["<<std::endl;
 
@@ -47,13 +53,6 @@ void Graph::displayGraph(){
         std::cout<<std::endl;
     }
     std::cout<<"]"<<std::endl;
-}
-
-void Graph::setVertex(const std::string& name){
-    int indexName = getVertexIndex(name);
-    if(indexName != -1) return;
-    vertexNames.push_back(name);
-    relations.push_back(std::vector<Edge>());
 }
 
 void Graph::initGraph(){

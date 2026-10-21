@@ -29,6 +29,7 @@ void bfs(const Graph& graph){
     }
     std::cout<<"BFS result: ";
     for(int i = 0; i<bfsResult.size();i++){
-        std::cout<< bfsResult[i];
+        std::cout<< bfsResult[i]<< " ";
     }
+    std::cout<<std::endl;
 }
