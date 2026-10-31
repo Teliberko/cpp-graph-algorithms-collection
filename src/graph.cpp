@@ -56,32 +56,49 @@ void Graph::displayGraph(){
 }
 
 void Graph::initGraph(){
+    std::vector<Edge> edges;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dist(1,100);
     std::string temp;
+    int start;
+    int distance;
     std::cout<<"Input size of your graph"<<std::endl;
     std::getline(std::cin,temp);
     int size = stoi(temp);
 
-    std::uniform_int_distribution<int> vert(0,size-1);
     for(int i = 0; i< size; i++){
         std::string s(1,'A' + i);
         setVertex(s);
     }
 
-    
+
+
     for(int i = 0; i<size;i++){
-        for(int j = 0; j<size;j++){
+        if(this->type == 2){
+            start = i + 1;
+        }
+        else{
+            start = 0;
+        }
+        for(int j = start; j<size;j++){
 
             if(i == j) continue;
 
             if(dist(gen) > 45){
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
-                setEdge(dist(gen),from,to);
-            
+                distance = dist(gen);
+                setEdge(distance,from,to);
+                setEdge(distance,to,from);
+    
             }
         }
     }
+   
 }
+
+Graph::Graph(int type) : type(type) {}
+
+
+

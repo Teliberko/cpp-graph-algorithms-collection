@@ -13,6 +13,7 @@ class Graph{
 private:
     std::vector<std::string> vertexNames;
     std::vector<std::vector<Edge>> relations;
+    int type; //1 - directed graph; 2 - undirected graph
     
 public:
     int getVertexIndex(const std::string& name) const;
@@ -24,6 +25,7 @@ public:
         const std::string& to);
     void initGraph();
     void displayGraph();
+    Graph(int type);
 };
 
 

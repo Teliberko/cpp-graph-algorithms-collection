@@ -4,7 +4,7 @@
 int main(){
     int key = 1;
     int choice;
-    Graph graph; 
+    Graph graph(2); 
     std::string temp;
 
     graph.initGraph();
