@@ -90,8 +90,9 @@ void Graph::initGraph(){
                 std::string to(1,'A' + j);
                 distance = dist(gen);
                 setEdge(distance,from,to);
-                setEdge(distance,to,from);
-    
+                if(this->type == 2){
+                    setEdge(distance,to,from);
+                }
             }
         }
     }
@@ -99,6 +100,3 @@ void Graph::initGraph(){
 }
 
 Graph::Graph(int type) : type(type) {}
-
-
-
