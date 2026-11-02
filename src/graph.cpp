@@ -85,7 +85,7 @@ void Graph::initGraph(){
 
             if(i == j) continue;
 
-            if(dist(gen) > 45){
+            if(dist(gen) > 95){
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
                 distance = dist(gen);

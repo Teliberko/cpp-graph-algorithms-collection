@@ -34,7 +34,39 @@ void dfs(const Graph& graph){
     }
     std::cout<<"DFS result: ";
     for(int i =0;i<dfsResult.size();i++){
-        std::cout<<dfsResult[i]<<" ";
+        char vertex = 'A' + dfsResult[i];
+        std::cout<<vertex<<" ";
     }
     std::cout<<std::endl;
+}
+
+
+
+std::vector<int> dfs(const Graph& graph, int start){
+    std::stack<int> s;
+    std::vector<int> dfsResult;
+    int size;
+    int current;
+
+    size = graph.getSize();
+    
+    std::vector<bool> visited(size,false);
+
+    s.push(start);
+    visited[start] = true;
+
+    while(!s.empty()){
+        current = s.top();
+        s.pop();
+        dfsResult.push_back(current);
+        std::vector<Edge> neighboors = graph.getEdges(current);
+        for(int i = 0; i<neighboors.size();i++){
+            int to = neighboors[i].to;
+            if(visited[to] != true){
+                visited[to] = true;
+                s.push(to);
+            }
+        }
+    }
+    return dfsResult;
 }
