@@ -85,7 +85,7 @@ void Graph::initGraph(){
 
             if(i == j) continue;
 
-            if(dist(gen) > 95){
+            if(dist(gen) > 60){
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
                 distance = dist(gen);
@@ -100,3 +100,25 @@ void Graph::initGraph(){
 }
 
 Graph::Graph(int type) : type(type) {}
+
+void Graph::convertType(){
+    int size = this->getSize();
+    std::vector<std::vector<Edge>> copy = relations;
+    switch(this->type){
+        case 1:  //directed -> undirected
+            for(int i =0; i<size;i++){
+                for(int j = 0; j< copy[i].size();j++){
+                    std::string from(1,'A' + copy[i][j].to);
+                    std::string to(1,'A' + i);
+                    setEdge(copy[i][j].weight, from, to);
+                }
+            }
+            this->type = 2;
+        break;
+        case 2:
+            //in progress. not need now
+        break;
+        default:
+        break;
+    }
+}

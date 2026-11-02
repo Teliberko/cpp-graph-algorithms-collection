@@ -25,6 +25,7 @@ public:
         const std::string& to);
     void initGraph();
     void displayGraph();
+    void convertType();
     Graph(int type);
 };
 
