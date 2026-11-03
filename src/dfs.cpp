@@ -70,3 +70,17 @@ std::vector<int> dfs(const Graph& graph, int start){
     }
     return dfsResult;
 }
+
+void recursiveDfs(const Graph& graph, int start, std::vector<bool>& visited, std::vector<int>& result,int mode){
+    visited[start] = true;
+    if(mode == 2) result.push_back(start);
+    const std::vector<Edge>& neighboors = graph.getEdges(start);
+    for(int i = 0;i<neighboors.size();i++){
+        int to = neighboors[i].to;
+        if(visited[to] != true){
+            recursiveDfs(graph,to,visited,result,mode);
+        }
+    }
+    if(mode == 1) result.push_back(start);
+    
+}

@@ -9,7 +9,7 @@ int Graph::getVertexIndex(const std::string& name) const{
     return -1;
 }
 
-const int Graph::getSize()const {
+int Graph::getSize()const {
     return this->vertexNames.size();
 }
 
@@ -17,7 +17,7 @@ const std::vector<Edge>& Graph::getEdges(int index) const{
     return relations.at(index);
 }
 
-const int Graph::getType() const{
+int Graph::getType() const{
     return this->type;
 }
 
@@ -50,6 +50,18 @@ void Graph::setEdge(int distance,
                 relations[indexFrom].push_back({distance, indexTo});
             }
         }
+}
+
+void Graph::removeEdge(int vertex, int to){
+    for(int i =0;i<relations[vertex].size();){
+        if(relations[vertex][i].to == to) {
+            relations[vertex].erase(relations[vertex].begin() + i);
+        }
+        else{
+            ++i;
+        }
+    }
+    
 }
 
 void Graph::displayGraph(){
@@ -128,9 +140,21 @@ void Graph::convertType(){
             this->type = 2;
         break;
         case 2:
-            //in progress. not need now
+            
         break;
         default:
         break;
     }
+}
+
+void Graph::transpose(){
+    int size = this->getSize();
+    std::vector<std::vector<Edge>> copy(size);
+
+    for(int i =0;i<size;i++){
+        for(const Edge& edge : relations[i]){
+            copy[edge.to].push_back({edge.weight,i});
+        }
+    }
+    relations.swap(copy);
 }
