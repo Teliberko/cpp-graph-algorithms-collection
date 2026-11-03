@@ -19,6 +19,7 @@ public:
     int getVertexIndex(const std::string& name) const;
     const int getSize()const;
     const std::vector<Edge>& getEdges(int index) const;
+    const int getType() const;
     void setVertex(const std::string& name);
     void setEdge(int distance,
         const std::string& from, 
@@ -26,6 +27,7 @@ public:
     void initGraph();
     void displayGraph();
     void convertType();
+    Graph& operator=(const Graph& other) = default;
     Graph(int type);
 };
 

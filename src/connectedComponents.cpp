@@ -1,6 +1,39 @@
 #include "../include/algorithms.hpp"
 
-void connectedComp(const Graph& graph){
+void undirectedConCom(const Graph& graph);
+
+void connectedComponents(const Graph& graph){
+    
+    int type;
+
+    type = graph.getType();
+
+    switch(type)
+    {
+        case 1:
+        {
+            Graph copy = graph;
+            copy.convertType();
+            undirectedConCom(copy); //WCC
+            break;
+        }
+        case 2:
+        {
+            undirectedConCom(graph);
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+
+}
+
+
+
+
+void undirectedConCom(const Graph& graph){
     int size = graph.getSize();
     int step = 0;
     std::vector<std::vector<int>> resultComponents;
@@ -24,3 +57,8 @@ void connectedComp(const Graph& graph){
     }
     std::cout<<std::endl;
 }
+
+void SCC(){
+
+}
+

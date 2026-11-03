@@ -17,6 +17,9 @@ const std::vector<Edge>& Graph::getEdges(int index) const{
     return relations.at(index);
 }
 
+const int Graph::getType() const{
+    return this->type;
+}
 
 void Graph::setVertex(const std::string& name){
     int indexName = getVertexIndex(name);
@@ -28,6 +31,7 @@ void Graph::setVertex(const std::string& name){
 void Graph::setEdge(int distance,
     const std::string& from, 
     const std::string& to){
+        int isPresent = 0;
 
         int indexFrom = getVertexIndex(from);
         int indexTo = getVertexIndex(to);
@@ -36,7 +40,15 @@ void Graph::setEdge(int distance,
             std::cout<<"Error: not found vertex"<<std::endl;
         }
         else{
-            relations[indexFrom].push_back({distance, indexTo});
+            for(int i = 0;i<relations[indexFrom].size();i++){
+                if(indexTo == relations[indexFrom][i].to){
+                    relations[indexFrom][i].weight = distance;
+                    isPresent = 1;
+                }
+            }
+            if(!isPresent){
+                relations[indexFrom].push_back({distance, indexTo});
+            }
         }
 }
 
@@ -85,7 +97,7 @@ void Graph::initGraph(){
 
             if(i == j) continue;
 
-            if(dist(gen) > 60){
+            if(dist(gen) > 90){
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
                 distance = dist(gen);

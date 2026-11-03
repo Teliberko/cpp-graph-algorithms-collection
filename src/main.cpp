@@ -31,7 +31,7 @@ int main(){
                 dfs(graph);
             break;
             case(3):
-                connectedComp(graph);
+                connectedComponents(graph);
             break;
             case(4):
                 graph.convertType();
