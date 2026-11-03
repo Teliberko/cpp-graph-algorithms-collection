@@ -29,7 +29,34 @@ void bfs(const Graph& graph){
     }
     std::cout<<"BFS result: ";
     for(int i = 0; i<bfsResult.size();i++){
-        std::cout<< bfsResult[i]<< " ";
+        char vertex = 'A' + bfsResult[i];
+        std::cout<<vertex<< " ";
     }
     std::cout<<std::endl;
+}
+
+
+
+std::vector<int> bfs(const Graph& graph, int start){
+    std::queue<int> q;
+    std::vector<int> bfsResult;
+    int size = graph.getSize();
+ 
+    std::vector<bool> visited(size,false);
+    visited[start] = true;
+    q.push(start);
+    while(!q.empty()){
+        int current = q.front();
+        q.pop();
+        bfsResult.push_back(current);
+        std::vector<Edge> neighbors = graph.getEdges(current);
+        for(int i = 0; i<neighbors.size();i++){
+            int to = neighbors[i].to;
+            if(visited[to] != true){
+                visited[to] = true;
+                q.push(to);
+            }
+        }
+    }
+    return bfsResult;
 }

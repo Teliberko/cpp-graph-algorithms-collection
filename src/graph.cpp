@@ -9,7 +9,7 @@ int Graph::getVertexIndex(const std::string& name) const{
     return -1;
 }
 
-const int Graph::getSize()const {
+int Graph::getSize()const {
     return this->vertexNames.size();
 }
 
@@ -17,6 +17,9 @@ const std::vector<Edge>& Graph::getEdges(int index) const{
     return relations.at(index);
 }
 
+int Graph::getType() const{
+    return this->type;
+}
 
 void Graph::setVertex(const std::string& name){
     int indexName = getVertexIndex(name);
@@ -28,6 +31,7 @@ void Graph::setVertex(const std::string& name){
 void Graph::setEdge(int distance,
     const std::string& from, 
     const std::string& to){
+        int isPresent = 0;
 
         int indexFrom = getVertexIndex(from);
         int indexTo = getVertexIndex(to);
@@ -39,10 +43,25 @@ void Graph::setEdge(int distance,
             for(int i = 0;i<relations[indexFrom].size();i++){
                 if(indexTo == relations[indexFrom][i].to){
                     relations[indexFrom][i].weight = distance;
+                    isPresent = 1;
                 }
             }
-            relations[indexFrom].push_back({distance, indexTo});
+            if(!isPresent){
+                relations[indexFrom].push_back({distance, indexTo});
+            }
         }
+}
+
+void Graph::removeEdge(int vertex, int to){
+    for(int i =0;i<relations[vertex].size();){
+        if(relations[vertex][i].to == to) {
+            relations[vertex].erase(relations[vertex].begin() + i);
+        }
+        else{
+            ++i;
+        }
+    }
+    
 }
 
 void Graph::displayGraph(){
@@ -90,7 +109,9 @@ void Graph::initGraph(){
 
             if(i == j) continue;
 
-            if(dist(gen) > 60){
+
+            if(dist(gen) > 90){
+
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
                 distance = dist(gen);
@@ -105,3 +126,37 @@ void Graph::initGraph(){
 }
 
 Graph::Graph(int type) : type(type) {}
+
+void Graph::convertType(){
+    int size = this->getSize();
+    std::vector<std::vector<Edge>> copy = relations;
+    switch(this->type){
+        case 1:  //directed -> undirected
+            for(int i =0; i<size;i++){
+                for(int j = 0; j< copy[i].size();j++){
+                    std::string from(1,'A' + copy[i][j].to);
+                    std::string to(1,'A' + i);
+                    setEdge(copy[i][j].weight, from, to);
+                }
+            }
+            this->type = 2;
+        break;
+        case 2:
+            
+        break;
+        default:
+        break;
+    }
+}
+
+void Graph::transpose(){
+    int size = this->getSize();
+    std::vector<std::vector<Edge>> copy(size);
+
+    for(int i =0;i<size;i++){
+        for(const Edge& edge : relations[i]){
+            copy[edge.to].push_back({edge.weight,i});
+        }
+    }
+    relations.swap(copy);
+}

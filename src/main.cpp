@@ -15,6 +15,10 @@ int main(){
         std::cout<<"===Menu==="<<std::endl;
         std::cout<<"1. BFS"<<std::endl;
         std::cout<<"2. DFS"<<std::endl;
+        std::cout<<"3. Connected components"<<std::endl;
+        std::cout<<"4. Transpose"<<std::endl;
+        std::cout<<"5. Convert type of graph"<<std::endl;
+        std::cout<<"6. Show Graph"<<std::endl;
         std::cout<<"0. Exit"<<std::endl;
 
         std::getline(std::cin,temp);
@@ -26,6 +30,18 @@ int main(){
             break;
             case(2):
                 dfs(graph);
+            break;
+            case(3):
+                connectedComponents(graph);
+            break;
+            case(4):
+                graph.transpose();
+            break;
+            case(5):
+                graph.convertType();
+            break;
+            case(6):
+                graph.displayGraph();
             break;
             case(0):
                 key = 0;
