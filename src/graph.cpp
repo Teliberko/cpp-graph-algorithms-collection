@@ -36,6 +36,11 @@ void Graph::setEdge(int distance,
             std::cout<<"Error: not found vertex"<<std::endl;
         }
         else{
+            for(int i = 0;i<relations[indexFrom].size();i++){
+                if(indexTo == relations[indexFrom][i].to){
+                    relations[indexFrom][i].weight = distance;
+                }
+            }
             relations[indexFrom].push_back({distance, indexTo});
         }
 }
@@ -85,7 +90,7 @@ void Graph::initGraph(){
 
             if(i == j) continue;
 
-            if(dist(gen) > 45){
+            if(dist(gen) > 60){
                 std::string from(1,'A' + i);
                 std::string to(1,'A' + j);
                 distance = dist(gen);
